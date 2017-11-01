@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block extra_head %}
+        <meta http-equiv="refresh" content="3; url=/" />
+{% endblock extra_head %}
+{% block content %}
+        <table class="tableErrorCodHTML">
+            <tr>
+                <td style="width:30%;border-radius: 5px 5px 5px 5px;" class="textoGrande">
+                    401
+                </td>
+                <td style="width:3%;background-color:#0CF;border-radius: 5px 5px 5px 5px;">
+                    &nbsp;
+                </td>
+                <td style="width:68%;">
+                    DISCULPA<br>
+                    <div class="textoPequenyo">
+                        NECESITAS AUTENTICARTE<br>
+                        <br>
+                        <span class="textoPequenyo">En breve ser&aacutes redireccionado para iniciar sesi&oacuten</span><br>
+                        <a href="/" class="boton textoPequenyo">Ir al inicio</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+{% endblock %}

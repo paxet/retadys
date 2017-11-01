@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Aplicación para gestionar qué tareas debe realizar un trabajador y en qué máquinas.">
+    <meta name="author" content="Javier Caballero">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+    <title>{{ appname }}: REpartición de Tareas A Diestro Y Siniestro</title>
+
+    <!-- Bootstrap framework -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-3.3.7.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-4.6.3.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+<body>
+  <div class="main">
+    <!-- <div class="cover" data-color="green"></div> -->
+    <div class="container">
+      <h1 class="logo cursive">
+        {{ appname|title }}
+      </h1>
+
+      <div class="content">
+          {% include "_messages.html" %}
+          {% block content %}
+          {% endblock content %}
+      </div>
+    </div>
+    <div class="footer">
+        {% block footer %}
+        {% endblock footer %}
+        <div class="container">
+            Made with <i class="fa fa-heart heart"></i> by <a href="http://ointec.net">Paxet</a>.
+        </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/jquery-3.1.0.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-3.3.7.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+  {% block script %}
+  {% endblock %}
+</body>
+</html>

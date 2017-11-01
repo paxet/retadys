@@ -1,0 +1,135 @@
+.flashes {
+  background: #CEE5F5;
+  color: green;
+  border-radius: 5px 5px 5px 5px;
+  padding: 0.5em 1em;
+  border: 1px solid #AACBE2;
+  width:45%;
+  margin-left: 23%;
+  font-size: larger;
+}
+
+.flashes li {
+  margin-left: 10px;
+}
+
+.flashes .message {
+  color: green;
+}
+
+.flashes .info {
+  color: darkgreen;
+}
+
+.flashes .warning {
+  color: orange;
+}
+
+.flashes .error {
+  color: red;
+}
+.main{
+    background-position: center center;
+    background-size: cover;
+    height: auto;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    width: auto;
+}
+.cover{
+    position: fixed;
+    opacity: 1;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(3, 28, 7, 0.6);
+}
+.blur{
+  opacity:0;
+}
+.logo-container{
+    left: 50px;
+    position: absolute;
+    top: 20px;
+     z-index: 3;
+}
+.logo-container .logo{
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    width: 60px;
+    float: left;
+}
+.logo-container .brand{
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 20px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 60px
+}
+.main .logo{
+    color: #FFFFFF;
+    font-size: 56px;
+    font-weight: 300;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.33);
+    margin: 25px 0px;
+    z-index: 3;
+}
+.main .logo.cursive{
+    font-family: 'Grand Hotel',cursive;
+    font-size: 82px;
+
+}
+.main .content{
+    position: relative;
+    z-index: 4;
+}
+.main .motto{
+    min-height: 140px;
+}
+.main .motto, .main .sendit .info-text{
+    font-size: 28px;
+    color: #FFFFFF;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.33);
+    text-align: center;
+    margin-top: 50px;
+
+}
+.main .sendit .info-text{
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.footer{
+    position: relative;
+    bottom: 20px;
+    right: 0px;
+    width: 100%;
+    color: #AAAAAA;
+    z-index: 4;
+    text-align: right;
+    margin-top: 50px;
+}
+.footer .heart{
+    color: #FF3B30;
+}
+
+.full-width {
+    width: 100%;
+}
+
+th {
+    color: #0088cc
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #f2f2f2;
+}

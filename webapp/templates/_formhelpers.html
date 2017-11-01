@@ -1,0 +1,49 @@
+{% macro render_field(field) %}
+<div class="form-group">
+  {{ field.label(class="sr-only") }}
+  {{ field(**kwargs)|safe }}
+  {% if field.errors %}
+    <ul class=error>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endmacro %}
+{% macro render_email_field(field) %}
+<div class="form-group">
+  {{ field.label(class="sr-only") }}
+  <div class="input-group">
+    <span class="input-group-addon">@</span>
+    {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+      <ul class=error>
+      {% for error in field.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+{% macro render_file_field(field) %}
+<div class="form-group">
+  {{ field.label(class="sr-only") }}
+  <div class="input-group">
+    <span class="input-group-btn">
+      <span class="btn btn-primary btn-file">
+        Browse… {{ field(**kwargs)|safe }}
+      </span>
+    </span>
+    <input id="attachment_text" class="form-control" readonly="" type="text">
+    {% if field.errors %}
+      <ul class=error>
+      {% for error in field.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}

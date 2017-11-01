@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% block extra_head %}
+    {# Probando refresh con javascript
+    {% if not modificable %}
+        {% if refresh_url %}
+            <meta http-equiv="refresh" content="10; url={{ refresh_url }}" />
+        {% else %}
+            <meta http-equiv="refresh" content="10; url=/" />
+        {% endif %}
+    {% endif %}
+    #}
+    {% if modificable %}
+        <script>disable_timer=true;</script>
+    {% else %}
+        <script>disable_timer=false;</script>
+    {% endif %}
+{% endblock extra_head %}
+{% block content %}
+<script>
+    var horas = 0;
+</script>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        {% for maquina in maquinas %}
+        {# {%if tmaq[maquina.codigo] %} #}
+        <th class="column-header" width="{{ 100/(maquinas|length) }}%" style="min-width:150px;">
+            <strong>
+                {{ maquina.codigo }}
+                {% if modificable %}
+                    &nbsp;<a target="_blank" href="/admin/maquina/edit/?id={{ maquina.id }}&url=/admin/maquina/">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </strong><br>
+            {% if modificable %}
+            <a href="/seccion/{{ maquina.seccion.id }}?modificable={{modificable}}">{{ maquina.seccion }}</a>
+            {% else %}
+            <a href="/seccion/{{ maquina.seccion.id }}">{{ maquina.seccion }}</a>
+            {% endif %}
+        </th>
+        {# {% endif %} #}
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% for maquina in maquinas %}
+        {# {%if tmaq[maquina.codigo] %} #}
+        <td name="{{ maquina.id }}"  style="min-width:200px;">
+            <script>horas = 0;</script>
+            <table class="table-striped table-hover">
+                <tbody>
+                {% for tarea in tmaq[maquina.codigo] %}
+                <tr id="{{ tarea.id }}">
+                    <td width="7%" style="padding:2px;">
+                        <a href="#" class="move-up">
+                            <i class="fa fa-angle-up" aria-hidden="true"></i>
+                        </a><br>
+                        <a href="#" class="move-down">
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <div style="width:53%;float:left;text-align:left;overflow: auto;">
+                            <strong>
+                                {{ tarea.trabajo.orden_fabricacion }}
+                                {% if modificable %}
+                                    &nbsp;<a target="_blank" href="/admin/programacion/edit/?url=/admin/programacion/&id={{ tarea.id }}">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
+                            </strong>
+                        </div>
+                        <!-- <div style="width:16%;float:left;text-align:right;"><span style="font-size:smaller;">{{ tarea.trabajo.horas_realizacion }}h</span></div> -->
+                        <script>horas += {{ tarea.trabajo.horas_realizacion }};</script>
+                        <!-- <div style="width:23%;float:left;text-align:right;"> -->
+                        <div style="width:47%;float:left;text-align:right;">
+                            <span style="font-size:smaller;">{{ tarea.trabajo.horas_realizacion }}h</span>/<span><script>document.write(horas);</script></span>h
+                        <!-- </div> -->
+                        <!-- <div style="width:8%;float:left;text-align:right;"> -->
+                            <a href="#" class="dissmiss" style="margin-left:2px;">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <br>
+                        <div class="full-width" style="clear:both;padding-bottom:10px;">
+                            {{ tarea.prioridad }} <em>{{ tarea.trabajo.descripcion }}</em>
+                        </div>
+                        <div style="width:8%;float:left;text-align:left;padding-top:12px;">
+                            <a href="#" class="move-left">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div style="width:84%;float:left;text-align:center;">
+                            {% if tarea.fecha_entrega_prevista %}
+                            <span style="font-size:smaller;">
+                                F. prev: {{ tarea.fecha_entrega_prevista|datetime }}
+                            </span>
+                            <br>
+                            {% endif %}
+                            <span style="font-size:smaller;{% if tarea.cumple_entrega %}color:green;{% else %}color: red;{% endif %}">
+                                F. est: {{ tarea.fecha_entrega_calculada|datetime }}
+                            </span>
+
+                        </div>
+                        <div style="width:8%;float:right;text-align:left;padding-top:12px;">
+                            <a href="#" class="move-right">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </td>
+        {# {% endif %} #}
+        {% endfor %}
+    </tr>
+    </tbody>
+    {% if modificable %}
+    <tfoot>
+    <tr>
+        {% for maquina in maquinas %}
+        {# {%if tmaq[maquina.codigo] %} #}
+        <td width="{{ 100/(maquinas|length) }}%" style="min-width:150px;text-align:center;">
+            <a id="{{ maquina.id }}" href="#" class="add-job">
+                <span style="display:none;">{{ maquina.codigo }}</span>
+                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;A&ntilde;adir tarea
+            </a>
+        </td>
+        {# {% endif %} #}
+        {% endfor %}
+    </tr>
+    </tfoot>
+    {% endif %}
+</table>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <form id="form-job" class="form-horizontal" action="/tareas" style="display:none;margin-left:auto;margin-right:auto;">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Nueva Tarea</legend>
+
+                <!-- Button Drop Down -->
+                <div class="form-group">
+                    <label id="form-job-machinecod" class="col-md-3 control-label" for="form-job-work">Desde tareas existentes</label>
+                    <div class="col-md-8">
+                        <div class="input-group" style="width:100%;">
+                            <select id="form-job-work" name="form-job-work" class="form-control">
+                                <option value="1">Cargando...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr class="col-md-12">
+                <!-- Text input-->
+                <div class="form-group">
+                  <input type="hidden" id="form-job-machine" name="form-job-machine" value="" class="form-control input-md">
+                  <label class="col-md-3 control-label" for="form-job-work-new">Crear nueva</label>
+                  <div class="col-md-8">
+                  <input id="form-job-work-new" name="form-job-work-new" placeholder="Orden de fabricaci&oacute;n" class="form-control input-md" type="text">
+                  <!-- <span class="help-block">help</span> -->
+                  </div>
+                  <label class="col-md-3 control-label" for="form-job-work-desc-new">Descipci&oacute;n</label>
+                  <div class="col-md-8">
+                  <input id="form-job-work-desc-new" name="form-job-work-desc-new" placeholder="Texto descriptivo" class="form-control input-md" type="text">
+                  <!-- <span class="help-block">help</span> -->
+                  </div>
+                  <label class="col-md-3 control-label" for="form-job-work-hours-new">Horas</label>
+                  <div class="col-md-8">
+                  <input id="form-job-work-hours-new" name="form-job-work-hours-new" placeholder="Número de horas (s&oacute;lo si la OF es nueva)" class="form-control input-md" type="number" min="1">
+                  <!-- <span class="help-block">help</span> -->
+                  </div>
+                  <label class="col-md-3 control-label" for="form-job-work-date-new">F. entrega prev.</label>
+                  <div class="col-md-8">
+                      <div class='input-group date' id='jobdatetimepicker'>
+                          <input type='text' id="form-job-work-date-new" name="form-job-work-date-new" class="form-control" />
+                          <span class="input-group-addon">
+                              <span class="fa fa-calendar"></span>
+                          </span>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="form-job-send"></label>
+                    <div class="col-md-8">
+                        <button id="form-job-send" name="form-job-send" class="btn btn-success">Añadir</button>
+                        <button id="form-job-cancel" name="form-job-cancel" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#jobdatetimepicker').datetimepicker({
+            locale: 'es'
+        });
+    });
+</script>
+{% endblock %}
