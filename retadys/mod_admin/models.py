@@ -2,7 +2,7 @@ from datetime import date, datetime
 from flask_admin.contrib.peewee import ModelView
 from flask_admin.model import typefmt
 from playhouse.shortcuts import fn
-from webapp.mod_root.models import Programacion, Trabajo
+from retadys.mod_root.models import Programacion, Trabajo
 
 
 def datetime_format(view, value):

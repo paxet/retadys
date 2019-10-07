@@ -1,7 +1,7 @@
 from peewee import CharField, TextField, BooleanField, IntegerField, ForeignKeyField, DateTimeField, Check
 from playhouse.shortcuts import fn
-from webapp import worktime
-from webapp.db import BaseModel
+from retadys import worktime
+from retadys.db import BaseModel
 
 
 class Seccion(BaseModel):

@@ -1,6 +1,6 @@
 from flask_admin import Admin
-from webapp.mod_root.models import Maquina, Trabajo, Programacion, Seccion  # , Usuario
-from webapp.mod_admin.models import EditableModelView, ProgramacionModelView
+from retadys.mod_root.models import Maquina, Trabajo, Programacion, Seccion  # , Usuario
+from retadys.mod_admin.models import EditableModelView, ProgramacionModelView
 
 
 admin = Admin()

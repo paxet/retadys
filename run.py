@@ -4,9 +4,9 @@ import argparse
 
 # from flask_debugtoolbar import DebugToolbarExtension
 
-import webapp
-from webapp import app, db
-from webapp.mod_root.models import Maquina, Programacion, Trabajo, Seccion  # , Usuario
+import retadys
+from retadys import app, db
+from retadys.mod_root.models import Maquina, Programacion, Trabajo, Seccion  # , Usuario
 import config
 
 db_tables = [Maquina, Trabajo, Programacion, Seccion]  # Usuario
@@ -70,8 +70,8 @@ def interpret_args(args):
 
 
 if __name__ == '__main__':
-    desc = '{appname} web project: {description}'.format(appname=config.APP_NAME, description=webapp.__description__)
-    vers = '%(prog)s de {appname} {version}'.format(appname=config.APP_NAME, version=webapp.__version__)
+    desc = '{appname} web project: {description}'.format(appname=config.APP_NAME, description=retadys.__description__)
+    vers = '%(prog)s de {appname} {version}'.format(appname=config.APP_NAME, version=retadys.__version__)
     parser = argparse.ArgumentParser(description=desc)
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-c', '--create',

@@ -3,10 +3,10 @@ import locale
 from datetime import datetime
 from flask import Flask, g, request, url_for, render_template
 from werkzeug.contrib.fixers import ProxyFix
-from webapp import db
-from webapp.mail import mailer
-from webapp.mod_root.controllers import listener_root
-from webapp.mod_admin.controllers import admin
+from retadys import db
+from retadys.mail import mailer
+from retadys.mod_root.controllers import listener_root
+from retadys.mod_admin.controllers import admin
 
 __author__ = 'paxet'
 __version__ = '0.1.0.dev1'

@@ -2,8 +2,8 @@ from datetime import datetime
 from flask import Blueprint, render_template, flash, Markup, jsonify, redirect, url_for, request, current_app
 from playhouse.shortcuts import model_to_dict, fn
 from peewee import DoesNotExist
-from webapp.db import db
-from webapp.mod_root.models import Programacion, Trabajo, Maquina
+from retadys.db import db
+from retadys.mod_root.models import Programacion, Trabajo, Maquina
 
 listener_root = Blueprint('root', __name__)
 
