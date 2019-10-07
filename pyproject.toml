@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "retadys"
+version = "0.1.0"
+description = "REpartición de Tareas A Diestro Y Siniestro Aplicación para gestionar qué tareas debe realizar un trabajador y en qué máquinas."
+authors = ["Javier Caballero <jacallo@protonmail.com>"]
+license = "GPL-3.0+"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+peewee = "^3.11"
+Flask = "^1.1"
+Flask-Login = "^0.4.1"
+Flask-Admin = "^1.5"
+Flask-WTF = "^0.14.2"
+Flask-Mail = "^0.9.1"
+wtf-peewee = "^3.0"
+holidays = "^0.9.11"
+businesstimedelta = "^1.0"
+gunicorn = "^19.9"
+
+[tool.poetry.dev-dependencies]
+shiv = "^0.0.48"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
